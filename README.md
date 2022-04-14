@@ -20,11 +20,11 @@ Pillow 中最重要的类就是 [Image](https://pillow.readthedocs.io/en/stable/
 
 ```python
 from PIL import  Image
-im = Image.open('images/hopper.jpg')
+im = Image.open('images/test/hopper.jpg')
 im
 ```
 
-![png](images/output_6_0.png)
+![png](images/output/output_6_0.png)
 
 如果加载成功，会返回一个 [Image](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image) 对象；如果图像无法打开，则会抛出 [OSError](https://docs.python.org/3/library/exceptions.html#OSError) 异常。现在让我们打印类实例的属性来看看图像的信息。
 
@@ -60,7 +60,7 @@ Pillow 库支持读取多种图像格式。请使用 [Image](https://pillow.read
 
 ```python
 from PIL import  Image
-fname = 'images/hopper.png'
+fname = 'images/test/hopper.png'
 im_png = Image.open(fname)
 im_png.save(f'{fname.split(".")[0]}.jpg')
 ```
@@ -70,7 +70,7 @@ im_png.save(f'{fname.split(".")[0]}.jpg')
 ```python
 from PIL import  Image
 thumbnail_size = (64, 64) # 指定缩略图的大小
-fname = 'images/hopper.jpg'
+fname = 'images/test/hopper.jpg'
 im = Image.open(fname)
 if thumbnail_size:
     im.thumbnail(thumbnail_size)
@@ -79,7 +79,7 @@ else:
 im
 ```
 
-![png](images/output_19_0.png)
+![png](images/output/output_19_0.png)
 
 ### 裁剪、粘贴及合并图像
 
@@ -87,14 +87,14 @@ im
 
 ```python
 from PIL import  Image
-fname = 'images/hopper.jpg'
+fname = 'images/test/hopper.jpg'
 im = Image.open(fname)
 box = (0, 0, 64, 64)
 region = im.crop(box)
 region
 ```
 
-![png](images/output_22_0.png)
+![png](images/output/output_22_0.png)
 
 Pillow 定义图像左上角坐标为 (0, 0)，[crop()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.crop) 方法接受一个四元组参数，对应裁剪的坐标 (左, 上, 右, 下)。例如，(0, 0, 64, 64) 表示裁剪矩形左上角的坐标是 (0, 0)，右下角的坐标是 (64, 64)。那么，最终裁剪的子图大小就是 (64-0, 64-0)。
 
@@ -107,7 +107,7 @@ im.paste(region, box) # 粘贴图像
 im
 ```
 
-![png](images/output_25_0.png)
+![png](images/output/output_25_0.png)
 
 使用 [paste()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.paste) 方法粘贴图像。贴图的大小必须和给定粘贴区域的大小一致，且不能超出给定底图的区域。
 
@@ -124,13 +124,13 @@ im_3.paste(im_2, (0, size[1]//3*2))
 im_3
 ```
 
-![png](images/output_28_0.png)
+![png](images/output/output_28_0.png)
 
 #### 划分和合并波段
 
 ```python
 from PIL import  Image
-fname = 'images/hopper.jpg'
+fname = 'images/test/hopper.jpg'
 im = Image.open(fname)
 r, g, b = im.split()
 rgb = Image.merge('RGB', (r, g, b))
@@ -149,7 +149,7 @@ for i, j in enumerate(im_list):
 plt.show()
 ```
 
-![png](images/output_30_0.png)
+![png](images/output/output_30_0.png)
 
 [split()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.split) 方法用于划分图像波段。对于单波段图像，返回它本身。
 
@@ -175,7 +175,7 @@ for i, j in enumerate(im_list):
 plt.show()
 ```
 
-![png](images/output_34_0.png)
+![png](images/output/output_34_0.png)
 
 使用 [resize()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.resize) 方法缩放图像，该方法接受一个二元组，其含义为图像的宽高；使用 [rotate()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.rotate) 方法旋转图像，接受一个整数，其含义为逆时针旋转的角度。
 
@@ -183,7 +183,7 @@ plt.show()
 
 ```python
 from PIL import  Image
-fname = 'images/hopper.jpg'
+fname = 'images/test/hopper.jpg'
 im = Image.open(fname)
 im_h_flip = im.transpose(Image.Transpose.FLIP_LEFT_RIGHT)
 im_v_flip = im.transpose(Image.Transpose.FLIP_TOP_BOTTOM)
@@ -200,7 +200,7 @@ for i, j in enumerate(im_list):
 plt.show()
 ```
 
-![png](images/output_37_0.png)
+![png](images/output/output_37_0.png)
 
 使用 [transpose()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.transpose) 方法可以实现图像的水平翻转和垂直翻转。
 
@@ -210,7 +210,7 @@ Pillow 库允许使用 [convert()](https://pillow.readthedocs.io/en/stable/refer
 
 ```python
 from PIL import  Image
-fname = 'images/hopper.jpg'
+fname = 'images/test/hopper.jpg'
 im = Image.open(fname)
 im_L = im.convert('L')
 
@@ -226,7 +226,7 @@ for i, j in enumerate(im_list):
 plt.show()
 ```
 
-![png](images/output_41_0.png)
+![png](images/output/output_41_0.png)
 
 该库支持每个格式与 `L` 和 `RGB` 的相互转换，但如何和其他格式进行转换，一般采用 RGB 做中间媒介。
 
@@ -238,7 +238,7 @@ Pillow 库提供了大量的的用于图像增强的方法和模块。
 
 ```python
 from PIL import  ImageFilter
-fname = 'images/hopper.jpg'
+fname = 'images/test/hopper.jpg'
 im = Image.open(fname)
 im_out = im.filter(ImageFilter.DETAIL) # 细节滤波，使图像中的细节更加明显
 
@@ -254,7 +254,7 @@ for i, j in enumerate(im_list):
 plt.show()
 ```
 
-![png](images/output_46_0.png)
+![png](images/output/output_46_0.png)
 
 #### 像素点操作
 
@@ -262,7 +262,7 @@ plt.show()
 
 ```python
 from PIL import  Image
-fname = 'images/hopper.jpg'
+fname = 'images/test/hopper.jpg'
 im = Image.open(fname)
 im_out = im.point(lambda _: _*1.25)
 
@@ -278,7 +278,7 @@ for i, j in enumerate(im_list):
 plt.show()
 ```
 
-![png](images/output_49_0.png)
+![png](images/output/output_49_0.png)
 
 #### 高级图像增强
 
@@ -286,7 +286,7 @@ plt.show()
 
 ```python
 from PIL import Image, ImageEnhance
-fname = 'images/hopper.jpg'
+fname = 'images/test/hopper.jpg'
 im = Image.open(fname)
 enh = ImageEnhance.Brightness(im).enhance(2)
 
@@ -302,7 +302,7 @@ for i, j in enumerate(im_list):
 plt.show()
 ```
 
-![png](images/output_52_0.png)
+![png](images/output/output_52_0.png)
 
 ### 图像序列
 
@@ -314,7 +314,7 @@ Pillow 库也包含对图像序列（动画格式）的一些基本支持。支�
 
 ```python
 from PIL import Image
-fname = 'images/digit.gif'
+fname = 'images/test/digit.gif'
 im = Image.open(fname)
 im_list = [im.copy()]
 try:
@@ -335,7 +335,7 @@ for i, j in enumerate(im_list):
 plt.show()
 ```
 
-![png](images/output_57_0.png)
+![png](images/output/output_57_0.png)
 
 #### 迭代序列
 
@@ -343,7 +343,7 @@ plt.show()
 
 ```python
 from PIL import Image, ImageSequence
-fname = 'images/digit.gif'
+fname = 'images/test/digit.gif'
 im = Image.open(fname)
 im_list = []
 for frame in ImageSequence.Iterator(im):
@@ -360,13 +360,13 @@ for i, j in enumerate(im_list):
 plt.show()
 ```
 
-![png](images/output_60_0.png)
+![png](images/output/output_60_0.png)
 
 此外，你也可以通过 Image 模块定义的属性 [n_frames](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.n_frames) 来控制 for 循环的次数。
 
 ```python
 from PIL import Image
-fname = 'images/digit.gif'
+fname = 'images/test/digit.gif'
 im = Image.open(fname)
 im_list = []
 for i in range(im.n_frames):
@@ -384,14 +384,14 @@ for i, j in enumerate(im_list):
 plt.show()
 ```
 
-![png](images/output_62_0.png)
+![png](images/output/output_62_0.png)
 
 ### PostScript 打印
 
 ```python
 from PIL import Image, PSDraw
-with Image.open("images/hopper.jpg") as im:
-    with open('images/hopper.ps', 'wb') as fp:
+with Image.open("images/test/hopper.jpg") as im:
+    with open('images/test/hopper.ps', 'wb') as fp:
         # 创建文档
         ps = PSDraw.PSDraw(fp)
 
@@ -416,7 +416,7 @@ with Image.open("images/hopper.jpg") as im:
 
 ```python
 from PIL import Image
-with Image.open('images/hopper.jpg') as im:
+with Image.open('images/test/hopper.jpg') as im:
     im.show()
 ```
 
@@ -424,7 +424,7 @@ with Image.open('images/hopper.jpg') as im:
 
 ```python
 from PIL import  Image
-with open('images/hopper.jpg', 'rb') as fp:
+with open('images/test/hopper.jpg', 'rb') as fp:
     im = Image.open(fp)
     im.show()
 ```
@@ -433,12 +433,12 @@ with open('images/hopper.jpg', 'rb') as fp:
 
 ```python
 from PIL import Image, TarIO
-fp = TarIO.TarIO('images/hopper.tar', "hopper.jpg")
+fp = TarIO.TarIO('images/test/hopper.tar', "hopper.jpg")
 im = Image.open(fp)
 im
 ```
 
-![png](images/output_71_0.png)
+![png](images/output/output_71_0.png)
 
 #### 批量处理
 
@@ -466,7 +466,7 @@ if __name__=='__main__':
 
 ```python
 from PIL import Image
-fname = 'images/hopper.jpg'
+fname = 'images/test/hopper.jpg'
 with Image.open(fname) as im:
     print("original =", im.mode, im.size)
 
@@ -487,7 +487,7 @@ with Image.open(fname) as im:
 
 ```python
 from PIL import  Image
-im = Image.open('images/hopper.jpg')
+im = Image.open('images/test/hopper.jpg')
 print(im.getbands())
 print(list(im.getdata(0))[:10]) # 数据太多，这里只展示前10个像素点的值
 r, g, b = im.split()
@@ -498,7 +498,7 @@ r
     ('R', 'G', 'B')
     [24, 18, 16, 22, 25, 23, 19, 17, 28, 29]
 
-![png](images/output_81_1.png)
+![png](images/output/output_81_1.png)
 
 - [Image.getbands()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.getbands)：获取图像中所有波段的名称，并以元组的形式返回。
 - [Image.getdata(band=None)](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.getdata)：将此图像的内容作为包含像素值的序列对象返回。序列对象是扁平的，即第一行的值紧跟在第0行之后，依此类推。`band` 参数表示波段的索引，默认是 `None`，返回所有波段。
@@ -521,7 +521,7 @@ r
 
 ```python
 from PIL import  Image
-im = Image.open('images/hopper.jpg')
+im = Image.open('images/test/hopper.jpg')
 print(im.mode)
 r = im.getchannel('R')
 print(r.mode)
@@ -536,11 +536,11 @@ print(r.mode)
 
 ```python
 from PIL import  Image
-im = Image.open('images/hopper.jpg')
-im.info
+im = Image.open('images/test/hopper.jpg')
+im.size
 ```
 
-    {'jfif': 257, 'jfif_version': (1, 1), 'jfif_unit': 0, 'jfif_density': (1, 1)}
+    (128, 128)
 
 ### 坐标系
 
@@ -562,4 +562,4 @@ Pillow 使用笛卡尔坐标系，左上角坐标为 (0, 0)。坐标通常作为
 
 ## 参考
 
-> [Pillow 官方文档](https://pillow.readthedocs.io/)
+> [Pillow 官方文档](https://pillow.readthedocs.io/en/stable/index.html)
