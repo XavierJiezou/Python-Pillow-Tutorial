@@ -24,7 +24,7 @@ im = Image.open('images/test/hopper.jpg')
 im
 ```
 
-![png](images/output/output_6_0.png)
+![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_6_0.png)
 
 如果加载成功，会返回一个 [Image](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image) 对象；如果图像无法打开，则会抛出 [OSError](https://docs.python.org/3/library/exceptions.html#OSError) 异常。现在让我们打印类实例的属性来看看图像的信息。
 
@@ -79,7 +79,7 @@ else:
 im
 ```
 
-![png](images/output/output_19_0.png)
+![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_19_0.png)
 
 ### 裁剪、粘贴及合并图像
 
@@ -94,7 +94,7 @@ region = im.crop(box)
 region
 ```
 
-![png](images/output/output_22_0.png)
+![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_22_0.png)
 
 Pillow 定义图像左上角坐标为 (0, 0)，[crop()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.crop) 方法接受一个四元组参数，对应裁剪的坐标 (左, 上, 右, 下)。例如，(0, 0, 64, 64) 表示裁剪矩形左上角的坐标是 (0, 0)，右下角的坐标是 (64, 64)。那么，最终裁剪的子图大小就是 (64-0, 64-0)。
 
@@ -107,7 +107,7 @@ im.paste(region, box) # 粘贴图像
 im
 ```
 
-![png](images/output/output_25_0.png)
+![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_25_0.png)
 
 使用 [paste()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.paste) 方法粘贴图像。贴图的大小必须和给定粘贴区域的大小一致，且不能超出给定底图的区域。
 
@@ -124,7 +124,7 @@ im_3.paste(im_2, (0, size[1]//3*2))
 im_3
 ```
 
-![png](images/output/output_28_0.png)
+![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_28_0.png)
 
 #### 划分和合并波段
 
@@ -149,7 +149,7 @@ for i, j in enumerate(im_list):
 plt.show()
 ```
 
-![png](images/output/output_30_0.png)
+![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_30_0.png)
 
 [split()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.split) 方法用于划分图像波段。对于单波段图像，返回它本身。
 
@@ -175,7 +175,7 @@ for i, j in enumerate(im_list):
 plt.show()
 ```
 
-![png](images/output/output_34_0.png)
+![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_34_0.png)
 
 使用 [resize()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.resize) 方法缩放图像，该方法接受一个二元组，其含义为图像的宽高；使用 [rotate()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.rotate) 方法旋转图像，接受一个整数，其含义为逆时针旋转的角度。
 
@@ -200,7 +200,7 @@ for i, j in enumerate(im_list):
 plt.show()
 ```
 
-![png](images/output/output_37_0.png)
+![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_37_0.png)
 
 使用 [transpose()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.transpose) 方法可以实现图像的水平翻转和垂直翻转。
 
@@ -226,7 +226,7 @@ for i, j in enumerate(im_list):
 plt.show()
 ```
 
-![png](images/output/output_41_0.png)
+![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_41_0.png)
 
 该库支持每个格式与 `L` 和 `RGB` 的相互转换，但如何和其他格式进行转换，一般采用 RGB 做中间媒介。
 
@@ -254,7 +254,7 @@ for i, j in enumerate(im_list):
 plt.show()
 ```
 
-![png](images/output/output_46_0.png)
+![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_46_0.png)
 
 #### 像素点操作
 
@@ -278,7 +278,7 @@ for i, j in enumerate(im_list):
 plt.show()
 ```
 
-![png](images/output/output_49_0.png)
+![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_49_0.png)
 
 #### 高级图像增强
 
@@ -302,7 +302,7 @@ for i, j in enumerate(im_list):
 plt.show()
 ```
 
-![png](images/output/output_52_0.png)
+![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_52_0.png)
 
 ### 图像序列
 
@@ -335,7 +335,7 @@ for i, j in enumerate(im_list):
 plt.show()
 ```
 
-![png](images/output/output_57_0.png)
+![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_57_0.png)
 
 #### 迭代序列
 
@@ -360,7 +360,7 @@ for i, j in enumerate(im_list):
 plt.show()
 ```
 
-![png](images/output/output_60_0.png)
+![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_60_0.png)
 
 此外，你也可以通过 Image 模块定义的属性 [n_frames](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.n_frames) 来控制 for 循环的次数。
 
@@ -384,7 +384,7 @@ for i, j in enumerate(im_list):
 plt.show()
 ```
 
-![png](images/output/output_62_0.png)
+![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_62_0.png)
 
 ### PostScript 打印
 
@@ -438,7 +438,7 @@ im = Image.open(fp)
 im
 ```
 
-![png](images/output/output_71_0.png)
+![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_71_0.png)
 
 #### 批量处理
 
@@ -498,7 +498,7 @@ r
     ('R', 'G', 'B')
     [24, 18, 16, 22, 25, 23, 19, 17, 28, 29]
 
-![png](images/output/output_81_1.png)
+![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_81_1.png)
 
 - [Image.getbands()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.getbands)：获取图像中所有波段的名称，并以元组的形式返回。
 - [Image.getdata(band=None)](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.getdata)：将此图像的内容作为包含像素值的序列对象返回。序列对象是扁平的，即第一行的值紧跟在第 0 行之后，依此类推。`band` 参数表示波段的索引，默认是 `None`，返回所有波段。
