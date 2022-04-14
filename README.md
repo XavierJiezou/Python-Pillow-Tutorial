@@ -306,7 +306,7 @@ plt.show()
 
 ### 图像序列
 
-Pillow 库也包含对图像序列（动画格式）的一些基本支持。支持的序列格式文件包括：GIF、TIFF和FLI等等。
+Pillow 库也包含对图像序列（动画格式）的一些基本支持。支持的序列格式文件包括：GIF、TIFF 和 FLI 等等。
 
 #### 读取序列
 
@@ -324,7 +324,7 @@ try:
 except EOFError:
     pass
 
-# 绘图 
+# 绘图
 import matplotlib.pyplot as plt
 plt.figure(figsize=(9, 3))
 for i, j in enumerate(im_list):
@@ -349,7 +349,7 @@ im_list = []
 for frame in ImageSequence.Iterator(im):
     im_list.append(frame.copy())
 
-# 绘图 
+# 绘图
 import matplotlib.pyplot as plt
 plt.figure(figsize=(9, 3))
 for i, j in enumerate(im_list):
@@ -373,7 +373,7 @@ for i in range(im.n_frames):
     im.seek(i)
     im_list.append(im.copy())
 
-# 绘图 
+# 绘图
 import matplotlib.pyplot as plt
 plt.figure(figsize=(9, 3))
 for i, j in enumerate(im_list):
@@ -501,20 +501,20 @@ r
 ![png](images/output/output_81_1.png)
 
 - [Image.getbands()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.getbands)：获取图像中所有波段的名称，并以元组的形式返回。
-- [Image.getdata(band=None)](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.getdata)：将此图像的内容作为包含像素值的序列对象返回。序列对象是扁平的，即第一行的值紧跟在第0行之后，依此类推。`band` 参数表示波段的索引，默认是 `None`，返回所有波段。
+- [Image.getdata(band=None)](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.getdata)：将此图像的内容作为包含像素值的序列对象返回。序列对象是扁平的，即第一行的值紧跟在第 0 行之后，依此类推。`band` 参数表示波段的索引，默认是 `None`，返回所有波段。
 - [Image.split()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.split)：将图像分割为单独的波段。
 - [Image.getchannel(channel)](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.getchannel)：返回图像的单个通道。`channel` 参数可接受一个整型的索引值，或大写的通道名称。
 
 ### 模式
 
-图像模式 [mode](https://pillow.readthedocs.io/en/stable/handbook/concepts.html#modes) 是一个字符串，它定义图像中像素的类型和深度。每个像素使用位深度的全部范围，例如：1位像素的范围是0-1，8位像素的范围是0-255，以此类推。当前 Pillow 支持以下标准模式：
+图像模式 [mode](https://pillow.readthedocs.io/en/stable/handbook/concepts.html#modes) 是一个字符串，它定义图像中像素的类型和深度。每个像素使用位深度的全部范围，例如：1 位像素的范围是 0-1，8 位像素的范围是 0-255，以此类推。当前 Pillow 支持以下标准模式：
 
-- `1`：1位，黑白，每字节存储1个像素
-- `L`：8位，黑白
-- `P`：8位，使用调色板映射到任何其他模式
-- `RGB`：3x8位，真彩色
-- `RGBA`：4x8位，带透明遮罩的真彩色
-- `CMYK`：4x8位，印刷色彩（cyan，magenta，yellow，black）
+- `1`：1 位，黑白，每字节存储 1 个像素
+- `L`：8 位，黑白
+- `P`：8 位，使用调色板映射到任何其他模式
+- `RGB`：3x8 位，真彩色
+- `RGBA`：4x8 位，带透明遮罩的真彩色
+- `CMYK`：4x8 位，印刷色彩（cyan，magenta，yellow，black）
 - ……
 
 你可以通过 [mode](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.mode) 属性读取图像的模式。这是一个包含上述值之一的字符串。
@@ -544,7 +544,7 @@ im.size
 
 ### 坐标系
 
-Pillow 使用笛卡尔坐标系，左上角坐标为 (0, 0)。坐标通常作为2元组传递给类或函数。矩形表示为4元组，前两个元素是左上角点的坐标，后两个元素代表右下角点的坐标。
+Pillow 使用笛卡尔坐标系，左上角坐标为 (0, 0)。坐标通常作为 2 元组传递给类或函数。矩形表示为 4 元组，前两个元素是左上角点的坐标，后两个元素代表右下角点的坐标。
 
 ### 调色板
 
