@@ -12,6 +12,4 @@ pip install Pillow
 
 ## 教程
 
-## 参考
 
-> Pillow 官方文档[https://pillow.readthedocs.io/](https://pillow.readthedocs.io/)
