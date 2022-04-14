@@ -1,18 +1,61 @@
-# Python-Pillow-Tutorial
+# 1. Python-Pillow-Tutorial
 
-## 引言
+## 1.1. 引言
 
 Python Imaging Library（简称：PIL）是一个基于 Python 的图像处理库，这个库提供了广泛的文件格式支持、高效的内部表示和相当强大的图像处理能力。旨在快速访问几种基本像素格式存储的数据，为通用图像处理工具提供坚实的基础。本文是 Pillow 的零基础入门教程，让你轻松学会用 Pillow 处理图像的方法。
 
-## 安装
+## 1.2. 目录
+<!-- TOC -->
+
+- [1. Python-Pillow-Tutorial](#1-python-pillow-tutorial)
+  - [1.1. 引言](#11-引言)
+  - [1.2. 目录](#12-目录)
+  - [1.3. 安装](#13-安装)
+  - [1.4. 教程](#14-教程)
+    - [1.4.1. 使用 Image 类](#141-使用-image-类)
+    - [1.4.2. 读取和保存图像](#142-读取和保存图像)
+      - [1.4.2.1. 将其他格式的图像转换为 JPEG 格式](#1421-将其他格式的图像转换为-jpeg-格式)
+      - [1.4.2.2. 创建 JPEG 缩略图](#1422-创建-jpeg-缩略图)
+    - [1.4.2. 裁剪、粘贴及合并图像](#142-裁剪粘贴及合并图像)
+      - [1.4.2.1. 裁剪图像](#1421-裁剪图像)
+      - [1.4.2.2. 粘贴图像](#1422-粘贴图像)
+      - [1.4.2.3. 合并图片](#1423-合并图片)
+      - [1.4.2.4. 划分和合并波段](#1424-划分和合并波段)
+    - [2.1. 几何变换](#21-几何变换)
+      - [2.1.1. 缩放和旋转图像](#211-缩放和旋转图像)
+      - [2.1. 翻转图像](#21-翻转图像)
+    - [2.1. 颜色变换](#21-颜色变换)
+    - [2.1. 图像增强](#21-图像增强)
+      - [2.1. 像素点操作](#21-像素点操作)
+      - [2.1. 高级图像增强](#21-高级图像增强)
+    - [2.1. 图像序列](#21-图像序列)
+      - [2.1.1. 读取序列](#211-读取序列)
+      - [2.1. 迭代序列](#21-迭代序列)
+    - [3.1. PostScript 打印](#31-postscript-打印)
+    - [3.2. 更多读取图片的方式](#32-更多读取图片的方式)
+      - [3.2.1. 从打开的文件中读取](#321-从打开的文件中读取)
+      - [3.2.2. 从 tar 存档中读取](#322-从-tar-存档中读取)
+      - [3.2.3. 批量处理](#323-批量处理)
+    - [1.4.2. 控制解码器](#142-控制解码器)
+  - [1.2. 概念](#12-概念)
+    - [1.2.1. 波段](#121-波段)
+    - [1.2.2. 模式](#122-模式)
+    - [1.2.3. 大小](#123-大小)
+    - [1.2.4. 坐标系](#124-坐标系)
+    - [1.2.5. 调色板](#125-调色板)
+    - [1.2.6. 滤波器](#126-滤波器)
+  - [1.2. 参考](#12-参考)
+
+<!-- /TOC -->
+## 1.3. 安装
 
 ```bash
 pip install Pillow
 ```
 
-## 教程
+## 1.4. 教程
 
-### 使用 Image 类
+### 1.4.1. 使用 Image 类
 
 Pillow 中最重要的类就是 [Image](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image) 类。通过这个类，你可以从文件中加载图像，处理图像，或从头创建图像。
 
@@ -50,13 +93,13 @@ im.show()
 
 [show()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.show) 方法首先将图像保存到一个临时文件中，然后调用系统默认打开图像的程序来加载这个临时文件。
 
-### 读取和保存图像
+### 1.4.2. 读取和保存图像
 
 Pillow 库支持读取多种图像格式。请使用 [Image](https://pillow.readthedocs.io/en/stable/reference/Image.html#module-PIL.Image) 模块的 [open()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.open) 函数从磁盘读取文件。读取的时候不必指定图像格式，Pillow 库会根据文件的内容自动确定。
 
 请使用 [Image](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image) 类的 [save()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.save) 方法来保存图像。保存图像时，文件后缀非常重要，因为这个库会根据你指定的文件拓展名来决定使用哪种存储格式。
 
-#### 将其他格式的图像转换为 JPEG 格式
+#### 1.4.2.1. 将其他格式的图像转换为 JPEG 格式
 
 ```python
 from PIL import  Image
@@ -65,7 +108,7 @@ im_png = Image.open(fname)
 im_png.save(f'{fname.split(".")[0]}.jpg')
 ```
 
-#### 创建 JPEG 缩略图
+#### 1.4.2.2. 创建 JPEG 缩略图
 
 ```python
 from PIL import  Image
@@ -81,9 +124,9 @@ im
 
 ![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_19_0.png)
 
-### 裁剪、粘贴及合并图像
+### 1.4.2. 裁剪、粘贴及合并图像
 
-#### 裁剪图像
+#### 1.4.2.1. 裁剪图像
 
 ```python
 from PIL import  Image
@@ -98,7 +141,7 @@ region
 
 Pillow 定义图像左上角坐标为 (0, 0)，[crop()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.crop) 方法接受一个四元组参数，对应裁剪的坐标 (左, 上, 右, 下)。例如，(0, 0, 64, 64) 表示裁剪矩形左上角的坐标是 (0, 0)，右下角的坐标是 (64, 64)。那么，最终裁剪的子图大小就是 (64-0, 64-0)。
 
-#### 粘贴图像
+#### 1.4.2.2. 粘贴图像
 
 ```python
 region = region.transpose(Image.Transpose.ROTATE_180) # 将图像旋转180°
@@ -111,7 +154,7 @@ im
 
 使用 [paste()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.paste) 方法粘贴图像。贴图的大小必须和给定粘贴区域的大小一致，且不能超出给定底图的区域。
 
-#### 合并图片
+#### 1.4.2.3. 合并图片
 
 ```python
 from PIL import  Image
@@ -126,7 +169,7 @@ im_3
 
 ![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_28_0.png)
 
-#### 划分和合并波段
+#### 1.4.2.4. 划分和合并波段
 
 ```python
 from PIL import  Image
@@ -137,7 +180,7 @@ rgb = Image.merge('RGB', (r, g, b))
 bgr = Image.merge('RGB', (b, g, r))
 
 
-# 绘图
+# 2. 绘图
 import matplotlib.pyplot as plt
 im_list = [r, g, b, rgb, bgr]
 plt.figure(figsize=(15, 3))
@@ -153,9 +196,9 @@ plt.show()
 
 [split()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.split) 方法用于划分图像波段。对于单波段图像，返回它本身。
 
-### 几何变换
+### 2.1. 几何变换
 
-#### 缩放和旋转图像
+#### 2.1.1. 缩放和旋转图像
 
 ```python
 from PIL import  Image
@@ -163,7 +206,7 @@ im = Image.new('RGB', (128, 128), 'cyan')
 im_resied = im.resize((64, 64))
 im_rotated = im.rotate(45)
 
-# 绘图
+# 2. 绘图
 import matplotlib.pyplot as plt
 im_list = [im, im_resied, im_rotated]
 plt.figure(figsize=(9, 3))
@@ -179,7 +222,7 @@ plt.show()
 
 使用 [resize()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.resize) 方法缩放图像，该方法接受一个二元组，其含义为图像的宽高；使用 [rotate()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.rotate) 方法旋转图像，接受一个整数，其含义为逆时针旋转的角度。
 
-#### 翻转图像
+#### 2.1. 翻转图像
 
 ```python
 from PIL import  Image
@@ -188,7 +231,7 @@ im = Image.open(fname)
 im_h_flip = im.transpose(Image.Transpose.FLIP_LEFT_RIGHT)
 im_v_flip = im.transpose(Image.Transpose.FLIP_TOP_BOTTOM)
 
-# 绘图
+# 2. 绘图
 import matplotlib.pyplot as plt
 im_list = [im, im_h_flip, im_v_flip]
 plt.figure(figsize=(9, 3))
@@ -204,7 +247,7 @@ plt.show()
 
 使用 [transpose()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.transpose) 方法可以实现图像的水平翻转和垂直翻转。
 
-### 颜色变换
+### 2.1. 颜色变换
 
 Pillow 库允许使用 [convert()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.convert) 方法在不同的像素表示之间转换图像。
 
@@ -214,7 +257,7 @@ fname = 'images/test/hopper.jpg'
 im = Image.open(fname)
 im_L = im.convert('L')
 
-# 绘图
+# 2. 绘图
 import matplotlib.pyplot as plt
 im_list = [im, im_L]
 plt.figure(figsize=(10, 5))
@@ -230,7 +273,7 @@ plt.show()
 
 该库支持每个格式与 `L` 和 `RGB` 的相互转换，但如何和其他格式进行转换，一般采用 RGB 做中间媒介。
 
-### 图像增强
+### 2.1. 图像增强
 
 Pillow 库提供了大量的的用于图像增强的方法和模块。
 
@@ -242,7 +285,7 @@ fname = 'images/test/hopper.jpg'
 im = Image.open(fname)
 im_out = im.filter(ImageFilter.DETAIL) # 细节滤波，使图像中的细节更加明显
 
-# 绘图
+# 2. 绘图
 import matplotlib.pyplot as plt
 im_list = [im, im_out]
 plt.figure(figsize=(10, 5))
@@ -256,7 +299,7 @@ plt.show()
 
 ![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_46_0.png)
 
-#### 像素点操作
+#### 2.1. 像素点操作
 
 [point()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.point) 方法用于批量转换图像像素点。该方法接受一个 lambda 函数作为参数，图像中所有像素点都根据该函数进行处理。例如，下方这个例子就是通过 point() 方法对图像的对比度进行增强。
 
@@ -266,7 +309,7 @@ fname = 'images/test/hopper.jpg'
 im = Image.open(fname)
 im_out = im.point(lambda _: _*1.25)
 
-# 绘图
+# 2. 绘图
 import matplotlib.pyplot as plt
 im_list = [im, im_out]
 plt.figure(figsize=(10, 5))
@@ -280,7 +323,7 @@ plt.show()
 
 ![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_49_0.png)
 
-#### 高级图像增强
+#### 2.1. 高级图像增强
 
 要想获得更高级的图像增强，你可以使用 [ImageEnhance](https://pillow.readthedocs.io/en/stable/reference/ImageEnhance.html#module-PIL.ImageEnhance) 模块中定义的类。通过那些类，你可以快速地对图像的亮度、对比度、色彩平衡以及锐化程度进行调节。
 
@@ -290,7 +333,7 @@ fname = 'images/test/hopper.jpg'
 im = Image.open(fname)
 enh = ImageEnhance.Brightness(im).enhance(2)
 
-# 绘图
+# 2. 绘图
 import matplotlib.pyplot as plt
 im_list = [im, enh]
 plt.figure(figsize=(10, 5))
@@ -304,11 +347,11 @@ plt.show()
 
 ![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_52_0.png)
 
-### 图像序列
+### 2.1. 图像序列
 
 Pillow 库也包含对图像序列（动画格式）的一些基本支持。支持的序列格式文件包括：GIF、TIFF 和 FLI 等等。
 
-#### 读取序列
+#### 2.1.1. 读取序列
 
 当加载序列图像时，默认加载的是第一帧。你可以使用 [seek()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.seek) 和 [tell()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.tell) 方法访问不同的帧。
 
@@ -324,7 +367,7 @@ try:
 except EOFError:
     pass
 
-# 绘图
+# 2. 绘图
 import matplotlib.pyplot as plt
 plt.figure(figsize=(9, 3))
 for i, j in enumerate(im_list):
@@ -337,7 +380,7 @@ plt.show()
 
 ![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_57_0.png)
 
-#### 迭代序列
+#### 2.1. 迭代序列
 
 除使用 [seek()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.seek) 方法读取图像序列外，[ImageSequence](https://pillow.readthedocs.io/en/stable/reference/ImageSequence.html) 模块还提供了 for 循环迭代遍历图像序列的方法。
 
@@ -349,7 +392,7 @@ im_list = []
 for frame in ImageSequence.Iterator(im):
     im_list.append(frame.copy())
 
-# 绘图
+# 2. 绘图
 import matplotlib.pyplot as plt
 plt.figure(figsize=(9, 3))
 for i, j in enumerate(im_list):
@@ -373,7 +416,7 @@ for i in range(im.n_frames):
     im.seek(i)
     im_list.append(im.copy())
 
-# 绘图
+# 3. 绘图
 import matplotlib.pyplot as plt
 plt.figure(figsize=(9, 3))
 for i, j in enumerate(im_list):
@@ -386,7 +429,7 @@ plt.show()
 
 ![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_62_0.png)
 
-### PostScript 打印
+### 3.1. PostScript 打印
 
 ```python
 from PIL import Image, PSDraw
@@ -410,7 +453,7 @@ with Image.open("images/test/hopper.jpg") as im:
         ps.end_document()
 ```
 
-### 更多读取图片的方式
+### 3.2. 更多读取图片的方式
 
 我们通常使用 Image.open(filename) 的方式来打开一张图片。其实，Image.open() 还可以作为上下文管理器。如果一切顺利，返回一个 [PIL.Image.Image](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image) 对象，否则抛出 [OSError](https://docs.python.org/3/library/exceptions.html#OSError) 异常。
 
@@ -420,7 +463,7 @@ with Image.open('images/test/hopper.jpg') as im:
     im.show()
 ```
 
-#### 从打开的文件中读取
+#### 3.2.1. 从打开的文件中读取
 
 ```python
 from PIL import  Image
@@ -429,7 +472,7 @@ with open('images/test/hopper.jpg', 'rb') as fp:
     im.show()
 ```
 
-#### 从 tar 存档中读取
+#### 3.2.2. 从 tar 存档中读取
 
 ```python
 from PIL import Image, TarIO
@@ -440,7 +483,7 @@ im
 
 ![png](https://cdn.jsdelivr.net/gh/XavierJiezou/Python-Pillow-Tutorial/images/output/output_71_0.png)
 
-#### 批量处理
+#### 3.2.3. 批量处理
 
 例如，将所有 PNG 格式的图片都转换成低质量的 JPEG 格式保存在工作目录中。
 
@@ -460,7 +503,7 @@ if __name__=='__main__':
         compress_image(path, path[:-4] + ".jpg")
 ```
 
-### 控制解码器
+### 1.4.2. 控制解码器
 
 [draft()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.draft) 方法允许操作一个打开但尚未加载的图像，使其尽可能与给定模式和大小匹配，这是通过重新配置图像解码器来实现的。但仅适用于 JPEG 和 MPO 文件。
 
@@ -479,9 +522,9 @@ with Image.open(fname) as im:
     original = RGB (128, 128)
     draft = L (64, 64)
 
-## 概念
+## 1.2. 概念
 
-### 波段
+### 1.2.1. 波段
 
 一幅图像可能由一个或多个波段组成，只要它们具有相同的尺寸和深度。例如，PNG 图像可能有 R、G、B 和 A 四个波段，分别表示红色、绿色、蓝色和 alpha 透明值。
 
@@ -505,7 +548,7 @@ r
 - [Image.split()](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.split)：将图像分割为单独的波段。
 - [Image.getchannel(channel)](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.getchannel)：返回图像的单个通道。`channel` 参数可接受一个整型的索引值，或大写的通道名称。
 
-### 模式
+### 1.2.2. 模式
 
 图像模式 [mode](https://pillow.readthedocs.io/en/stable/handbook/concepts.html#modes) 是一个字符串，它定义图像中像素的类型和深度。每个像素使用位深度的全部范围，例如：1 位像素的范围是 0-1，8 位像素的范围是 0-255，以此类推。当前 Pillow 支持以下标准模式：
 
@@ -530,7 +573,7 @@ print(r.mode)
     RGB
     L
 
-### 大小
+### 1.2.3. 大小
 
 你可以通过 [size](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.size) 属性读取图像大小。这是一个二元组，包含以像素位单位的水平和垂直大小，即图像的宽和高。
 
@@ -542,15 +585,15 @@ im.size
 
     (128, 128)
 
-### 坐标系
+### 1.2.4. 坐标系
 
 Pillow 使用笛卡尔坐标系，左上角坐标为 (0, 0)。坐标通常作为 2 元组传递给类或函数。矩形表示为 4 元组，前两个元素是左上角点的坐标，后两个元素代表右下角点的坐标。
 
-### 调色板
+### 1.2.5. 调色板
 
 调色板模式（p）使用调色板为每个像素定义实际颜色。
 
-### 滤波器
+### 1.2.6. 滤波器
 
 对于可能将多个输入像素映射到单个输出像素的几何操作，Pillow 提供了多种不同的重采样滤波器。
 
@@ -560,6 +603,6 @@ Pillow 使用笛卡尔坐标系，左上角坐标为 (0, 0)。坐标通常作为
 - PIL.Image.BICUBIC：双三插值
 - PIL.Image.LANCZOS：余弦滤波
 
-## 参考
+## 1.2. 参考
 
 > [Pillow 官方文档](https://pillow.readthedocs.io/en/stable/index.html)
